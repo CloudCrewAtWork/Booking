@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>20852769003-1khpkb9pp73pr7ji3udl8m720c9o4m09.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.20852769003-1khpkb9pp73pr7ji3udl8m720c9o4m09</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBoNDeymAi8Bf-C4qO8YAnQ-yHhCaatgRM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>20852769003</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>COM.ANURAG.Booking</string>
+	<key>PROJECT_ID</key>
+	<string>bookingapp-d730b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bookingapp-d730b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:20852769003:ios:8adc62e075575f1814beae</string>
+	<key>DATABASE_URL</key>
+	<string>https://bookingapp-d730b.firebaseio.com</string>
+</dict>
+</plist>
