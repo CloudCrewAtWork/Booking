@@ -40,16 +40,24 @@ class RegisterViewController: UIViewController {
                 print("hello:",error!)
             } else {
                 for document in (snapshot?.documents)! {
+                    
                     if let id = document.data()["id"] as? String {
+//                        var mail = document.data()["email"]
                         
+                        
+                        print("heya:")
                         let typedId = self.uniqueIDTextField.text!
                         
                         if id == typedId{
+                            
                             Auth.auth().createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!) { (user, error) in
                                 if error != nil {
                                     print(error!)
                                 }else {
+                                   
+//                                    mail = self.emailTextField.text!
                                     print("Registration success")
+                                    db.collection("Uid").document().setData(["email":"bomma"])
                                     
                                     //SVProgressHUD.dismiss()
                                     
@@ -72,4 +80,15 @@ class RegisterViewController: UIViewController {
         }
     }
 }
+private func retrieveData() {
+    let docRef = db.collection("cities").document("SF")
 
+    docRef.getDocument { (document, error) in
+        if let document = document, document.exists {
+            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+            print("Document data: \(dataDescription)")
+        } else {
+            print("Document does not exist")
+        }
+    }
+}

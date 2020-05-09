@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2354A14C2466B0CF00F5D8B8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354A14B2466B0CF00F5D8B8 /* User.swift */; };
 		23875DB72462E50900059C1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23875DB62462E50900059C1B /* AppDelegate.swift */; };
 		23875DB92462E50900059C1B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23875DB82462E50900059C1B /* SceneDelegate.swift */; };
 		23875DBB2462E50900059C1B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23875DBA2462E50900059C1B /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2354A14B2466B0CF00F5D8B8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		23875DB32462E50900059C1B /* Booking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Booking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23875DB62462E50900059C1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23875DB82462E50900059C1B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				23875DCE2462F16700059C1B /* RegisterViewController.swift */,
 				23875DD02462F17A00059C1B /* LoginViewController.swift */,
 				23875DBC2462E50900059C1B /* Main.storyboard */,
+				2354A14B2466B0CF00F5D8B8 /* User.swift */,
 				23875DD22462F6BD00059C1B /* FinalViewController.swift */,
 				23875DBF2462E50B00059C1B /* Assets.xcassets */,
 				23875DC12462E50B00059C1B /* LaunchScreen.storyboard */,
@@ -225,6 +228,7 @@
 				23875DB92462E50900059C1B /* SceneDelegate.swift in Sources */,
 				23875DD12462F17A00059C1B /* LoginViewController.swift in Sources */,
 				23875DCF2462F16700059C1B /* RegisterViewController.swift in Sources */,
+				2354A14C2466B0CF00F5D8B8 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
