@@ -20,6 +20,14 @@ class FinalViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func bookASlot(_ sender: UIButton) {
+        
+        let userID = Auth.auth().currentUser?.uid
+        print(userID)
+        
+        
+        
+    }
     
     @IBAction func logoutPressed(_ sender: UIBarButtonItem) {
         do {
@@ -46,4 +54,18 @@ class FinalViewController: UIViewController {
      }
      */
     
+}
+private func getDocument() {
+    //Get specific document from current user
+    let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+
+    // Get data
+    docRef.getDocument { (document, error) in
+        if let document = document, document.exists {
+            let dataDescription = document.data()
+            print(dataDescription?["email"] as Any)
+        } else {
+            print("Document does not exist")
+        }
+    }
 }

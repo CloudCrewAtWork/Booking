@@ -15,11 +15,12 @@ class RegisterViewController: UIViewController {
     
     var a : [String]  = []
     var b : [String]  = []
-
+    
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var uniqueIDTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
     
     
     override func viewDidLoad() {
@@ -34,6 +35,7 @@ class RegisterViewController: UIViewController {
     
     //    let db = Firestore.firestore()
     @IBAction func registerPressed(_ sender: UIButton) {
+        let c = User.init(email: emailTextField.text!, name: usernameTextField.text!, id: uniqueIDTextField.text!)
         let db = Firestore.firestore()
         db.collection("Uid").getDocuments { (snapshot, error) in
             if error != nil {
@@ -41,11 +43,11 @@ class RegisterViewController: UIViewController {
             } else {
                 for document in (snapshot?.documents)! {
                     
+                    
                     if let id = document.data()["id"] as? String {
-//                        var mail = document.data()["email"]
                         
                         
-                        print("heya:")
+                        
                         let typedId = self.uniqueIDTextField.text!
                         
                         if id == typedId{
@@ -54,25 +56,34 @@ class RegisterViewController: UIViewController {
                                 if error != nil {
                                     print(error!)
                                 }else {
-                                   
-//                                    mail = self.emailTextField.text!
+                                    // Add a new document in collection "cities"
+                                    db.collection("Users").document(c.name).setData([
+                                        "name": c.name,
+                                        "email": c.email,
+                                        "uniqueId": c.id
+                                    ]) { err in
+                                        if let err = err {
+                                            print("Error writing document: \(err)")
+                                        } else {
+                                            print("Document successfully written!")
+                                        }
+                                    }
+                                    
+                                    //                                    mail = self.emailTextField.text!
                                     print("Registration success")
-                                    db.collection("Uid").document().setData(["email":"bomma"])
+                                    
                                     
                                     //SVProgressHUD.dismiss()
                                     
                                     self.performSegue(withIdentifier: "goToBooking", sender: self)
                                     
-                                    
+                        
                                 }
                             }
                             
-                            
                         }
                         
-                        
                     }
-                    
                     
                 }
                 
@@ -80,9 +91,11 @@ class RegisterViewController: UIViewController {
         }
     }
 }
+
+
 private func retrieveData() {
     let docRef = db.collection("cities").document("SF")
-
+    
     docRef.getDocument { (document, error) in
         if let document = document, document.exists {
             let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
