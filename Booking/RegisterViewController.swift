@@ -13,8 +13,7 @@ import FirebaseFirestore
 class RegisterViewController: UIViewController {
     
     
-    var a : [String]  = []
-    var b : [String]  = []
+
     
     
     @IBOutlet weak var emailTextField: UITextField!
