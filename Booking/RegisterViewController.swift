@@ -34,6 +34,7 @@ class RegisterViewController: UIViewController {
     
     //    let db = Firestore.firestore()
     @IBAction func registerPressed(_ sender: UIButton) {
+//        retrieveData()
         let c = User.init(email: emailTextField.text!, name: usernameTextField.text!, id: uniqueIDTextField.text!)
         let db = Firestore.firestore()
         db.collection("Uid").getDocuments { (snapshot, error) in
@@ -92,15 +93,3 @@ class RegisterViewController: UIViewController {
 }
 
 
-private func retrieveData() {
-    let docRef = db.collection("cities").document("SF")
-    
-    docRef.getDocument { (document, error) in
-        if let document = document, document.exists {
-            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-            print("Document data: \(dataDescription)")
-        } else {
-            print("Document does not exist")
-        }
-    }
-}

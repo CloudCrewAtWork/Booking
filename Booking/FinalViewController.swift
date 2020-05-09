@@ -21,9 +21,17 @@ class FinalViewController: UIViewController {
     }
     
     @IBAction func bookASlot(_ sender: UIButton) {
-        
-        let userID = Auth.auth().currentUser?.uid
-        print(userID)
+        let userID = Auth.auth().currentUser?.email!
+        db.collection("Users").whereField("email", isEqualTo: userID as Any )
+           .getDocuments() { (querySnapshot, err) in
+               if let err = err {
+                   print("Error getting documents: \(err)")
+               } else {
+                   for document in querySnapshot!.documents {
+                       print("\(document.documentID)")
+                   }
+               }
+       }
         
         
         
@@ -55,17 +63,18 @@ class FinalViewController: UIViewController {
      */
     
 }
-private func getDocument() {
-    //Get specific document from current user
-    let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+//private func getDocument() {
+//    //Get specific document from current user
+//    let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+//
+//    // Get data
+//    docRef.getDocument { (document, error) in
+//        if let document = document, document.exists {
+//            let dataDescription = document.data()
+//            print(dataDescription?["email"] as Any)
+//        } else {
+//            print("Document does not exist")
+//        }
+//    }
+//}
 
-    // Get data
-    docRef.getDocument { (document, error) in
-        if let document = document, document.exists {
-            let dataDescription = document.data()
-            print(dataDescription?["email"] as Any)
-        } else {
-            print("Document does not exist")
-        }
-    }
-}
