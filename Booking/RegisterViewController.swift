@@ -53,6 +53,8 @@ class RegisterViewController: UIViewController {
                                                 print("Error  creating user")
                                             } else {
                                                 print("Registration success")
+                                                self.performSegue(withIdentifier: "goToBooking", sender: self)
+
                                                 db.collection("Users").document(c.name).setData([
                                                     "name": c.name,
                                                     "email": c.email,
