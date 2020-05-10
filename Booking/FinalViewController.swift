@@ -43,7 +43,11 @@ class FinalViewController: UIViewController {
                     print(id)
                     // creatin TimeSlots DataBase
 <<<<<<< HEAD
+<<<<<<< HEAD
                     db.collection("TimeSlots").whereField("name", isEqualTo: name).getDocuments() { (querySnapshot, err) in
+=======
+                    db.collection("TimeSlots").whereField("name", isEqualTo: document.documentID).getDocuments() { (querySnapshot, err) in
+>>>>>>> parent of 10cfc73... Update FinalViewController.swift
 =======
                     db.collection("TimeSlots").whereField("name", isEqualTo: document.documentID).getDocuments() { (querySnapshot, err) in
 >>>>>>> parent of 10cfc73... Update FinalViewController.swift
@@ -54,7 +58,11 @@ class FinalViewController: UIViewController {
                         if (querySnapshot?.count != 0) {
                             //query was succesful, but is empty -> uid not found
 <<<<<<< HEAD
+<<<<<<< HEAD
                             print("You have already booked a slot")
+=======
+                            print("Uid not valid")
+>>>>>>> parent of 10cfc73... Update FinalViewController.swift
 =======
                             print("Uid not valid")
 >>>>>>> parent of 10cfc73... Update FinalViewController.swift
