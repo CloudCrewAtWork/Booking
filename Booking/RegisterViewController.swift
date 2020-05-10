@@ -11,7 +11,7 @@ import Firebase
 import FirebaseFirestore
 
 class RegisterViewController: UIViewController {
-   
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var uniqueIDTextField: UITextField!
@@ -20,7 +20,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
-
+        
     }
     
     //    let db = Firestore.firestore()
@@ -28,8 +28,7 @@ class RegisterViewController: UIViewController {
         //        retrieveData()
         let c = User.init(email: emailTextField.text!, name: usernameTextField.text!, id: uniqueIDTextField.text!)
         let db = Firestore.firestore()
-        db.collection("Uid").whereField("id", isEqualTo: c.id)
-            .getDocuments() { (querySnapshot, err) in
+        db.collection("Uid").whereField("id", isEqualTo: c.id).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     //maybe connection problem
                     print("error retrieving documents \(err)")
@@ -54,7 +53,7 @@ class RegisterViewController: UIViewController {
                                             } else {
                                                 print("Registration success")
                                                 self.performSegue(withIdentifier: "goToBooking", sender: self)
-
+                                                
                                                 db.collection("Users").document(c.name).setData([
                                                     "name": c.name,
                                                     "email": c.email,

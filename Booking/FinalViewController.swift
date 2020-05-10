@@ -42,17 +42,31 @@ class FinalViewController: UIViewController {
                     let id = document.get("uniqueId")!
                     print(id)
                     // creatin TimeSlots DataBase
-                    db.collection("TimeSlots").document(name).setData([
-                        "name": document.documentID,
-                        "time": dateString,
-                        "uniqueId": document.get("uniqueId") as Any
-                           ]) { err in
-                               if let err = err {
-                                   print("Error writing document: \(err)")
-                               } else {
-                                   print("Document successfully written!")
+                    db.collection("TimeSlots").whereField("name", isEqualTo: document.documentID).getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        //maybe connection problem
+                        print("error retrieving documents \(err)")
+                    } else {
+                        if (querySnapshot?.count != 0) {
+                            //query was succesful, but is empty -> uid not found
+                            print("Uid not valid")
+                        }else{
+                            db.collection("TimeSlots").document(name).setData([
+                            "name": document.documentID,
+                            "time": dateString,
+                            "uniqueId": document.get("uniqueId") as Any
+                               ]) { err in
+                                   if let err = err {
+                                       print("Error writing document: \(err)")
+                                   } else {
+                                       print("Document successfully written!")
+                                   }
                                }
-                           }
+                            
+                        }
+                        }
+                    }
+                    
                     
                    }
                }
