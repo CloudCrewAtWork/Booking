@@ -11,18 +11,24 @@ import Firebase
 
 class FinalViewController: UIViewController {
     
-    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
-        self.ref = Database.database().reference()
+        
         
         // Do any additional setup after loading the view.
     }
     
     @IBAction func bookASlot(_ sender: UIButton) {
+        
+        
+        let date = Date()
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = df.string(from: date)
+
         let userID = Auth.auth().currentUser?.email!
         db.collection("Users").whereField("email", isEqualTo: userID as Any )
            .getDocuments() { (querySnapshot, err) in
@@ -30,13 +36,31 @@ class FinalViewController: UIViewController {
                    print("Error getting documents: \(err)")
                } else {
                    for document in querySnapshot!.documents {
-                       print("\(document.documentID)")
-                    let ref = self.ref.child("Slot List")
-                    let name  = [document.documentID]
-                    ref.setValue(name)
+                    
+//                    print("\(document.get("uniqueId")))")
+                    let name = document.documentID
+                    let id = document.get("uniqueId")!
+                    print(id)
+                    // creatin TimeSlots DataBase
+                    db.collection("TimeSlots").document(name).setData([
+                        "name": document.documentID,
+                        "time": dateString,
+                        "uniqueId": document.get("uniqueId") as Any
+                           ]) { err in
+                               if let err = err {
+                                   print("Error writing document: \(err)")
+                               } else {
+                                   print("Document successfully written!")
+                               }
+                           }
+                    
                    }
                }
        }
+        
+       
+        
+        
         
         
         
