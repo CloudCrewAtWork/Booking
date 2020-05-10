@@ -50,7 +50,7 @@ class RegisterViewController: UIViewController {
                                         // search result is empty -> no active user with provided id -> register !
                                         Auth.auth().createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!) { user, error in
                                             if (error != nil) {
-                                                print("Error creating user")
+                                                print("Error  creating user")
                                             } else {
                                                 print("Registration success")
                                                 db.collection("Users").document(c.name).setData([
