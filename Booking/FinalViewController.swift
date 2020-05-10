@@ -42,14 +42,22 @@ class FinalViewController: UIViewController {
                     let id = document.get("uniqueId")!
                     print(id)
                     // creatin TimeSlots DataBase
+<<<<<<< HEAD
                     db.collection("TimeSlots").whereField("name", isEqualTo: name).getDocuments() { (querySnapshot, err) in
+=======
+                    db.collection("TimeSlots").whereField("name", isEqualTo: document.documentID).getDocuments() { (querySnapshot, err) in
+>>>>>>> parent of 10cfc73... Update FinalViewController.swift
                     if let err = err {
                         //maybe connection problem
                         print("error retrieving documents \(err)")
                     } else {
                         if (querySnapshot?.count != 0) {
                             //query was succesful, but is empty -> uid not found
+<<<<<<< HEAD
                             print("You have already booked a slot")
+=======
+                            print("Uid not valid")
+>>>>>>> parent of 10cfc73... Update FinalViewController.swift
                         }else{
                             db.collection("TimeSlots").document(name).setData([
                             "name": document.documentID,
