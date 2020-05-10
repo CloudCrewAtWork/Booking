@@ -17,7 +17,7 @@ class FinalViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
-        
+        self.ref = Database.database().reference()
         
         // Do any additional setup after loading the view.
     }
