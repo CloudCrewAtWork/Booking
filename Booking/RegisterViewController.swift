@@ -40,17 +40,22 @@ class RegisterViewController: UIViewController {
         db.collection("Uid").whereField("id", isEqualTo: c.id)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
+                    print("Uid doesn't exist, Try with a valid one")
                     print("Error getting documents: \(err)")
                 } else {
+                    print("Uid exists")
                     db.collection("Users").whereField("uniqueId", isEqualTo: c.id)
                         .getDocuments() { (querySnapshot, err) in
                             if let err = err {
+                                print("uniqueId already in use")
                                 print("Error getting documents: \(err)")
                             } else {
+                                print("No users found with your uniqueId, creating a new user")
                                 Auth.auth().createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!) { (user, error) in
                                     if error != nil {
                                         print(error!)
                                     }else {
+                                        print("Registration success")
                                         // Add a new document in collection "cities"
                                         db.collection("Users").document(c.name).setData([
                                             "name": c.name,
@@ -65,7 +70,7 @@ class RegisterViewController: UIViewController {
                                         }
 
                                         //                                    mail = self.emailTextField.text!
-                                        print("Registration success")
+//                                        print("Registration success")
 
 
                                         //SVProgressHUD.dismiss()
