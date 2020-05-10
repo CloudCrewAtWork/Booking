@@ -11,6 +11,8 @@ import Firebase
 
 class FinalViewController: UIViewController {
     
+    var ref: DatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
@@ -29,9 +31,13 @@ class FinalViewController: UIViewController {
                } else {
                    for document in querySnapshot!.documents {
                        print("\(document.documentID)")
+                    let ref = self.ref.child("Slot List")
+                    let name  = [document.documentID]
+                    ref.setValue(name)
                    }
                }
        }
+        
         
         
         
