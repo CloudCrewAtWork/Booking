@@ -28,6 +28,7 @@ class RegisterViewController: UIViewController {
         //        retrieveData()
         let c = User.init(email: emailTextField.text!, name: usernameTextField.text!, id: uniqueIDTextField.text!)
         let db = Firestore.firestore()
+        
         db.collection("Uid").whereField("id", isEqualTo: c.id).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     //maybe connection problem

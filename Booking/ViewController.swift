@@ -10,7 +10,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,23 +27,45 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         // Do any additional setup after loading the view.
         exampleData()
+//        deleteDocument()
+        
     }
 
 
 }
 
+private func deleteDocument(){
+    var docCount = 0
+
+    db.collection("TimeSlots").whereField("written", isEqualTo: true)
+    .getDocuments() { (querySnapshot, err) in
+        if err != nil {
+            print("Error getting documents: (err)")
+        } else {
+            for document in querySnapshot!.documents {
+                docCount = querySnapshot?.count as! Int
+                let c = document.documentID
+                db.collection("TimeSlots").document(c).delete()
+            }
+            print(docCount)
+        
+        }
+}
+}
+
 private func exampleData() {
     // [START example_data]
     let citiesRef = db.collection("cities")
+    db.collection("cities").document("LA").delete()
 
-    citiesRef.document("SF").setData([
-        "name": "San Francisco",
-        "state": "CA",
-        "country": "USA",
-        "capital": false,
-        "population": 860000,
-        "regions": ["west_coast", "norcal"]
-        ])
+//    citiesRef.document("SF").setData([
+//        "name": "San Francisco",
+//        "state": "CA",
+//        "country": "USA",
+//        "capital": false,
+//        "population": 860000,
+//        "regions": ["west_coast", "norcal"]
+//        ])
     citiesRef.document("LA").setData([
         "name": "Los Angeles",
         "state": "CA",

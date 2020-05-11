@@ -17,6 +17,7 @@ class FinalViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var alertBox: UILabel!
     @IBAction func bookASlot(_ sender: UIButton) {
         
         let date = Date()
@@ -48,15 +49,20 @@ class FinalViewController: UIViewController {
                                     db.collection("TimeSlots").document(name!).setData([
                                         "name": name as Any,
                                         "time": dateString,
-                                        "uniqueId": id!
+                                        "uniqueId": id!,
+                                        "written": true
+
                                     ]) { err in
                                         if let err = err {
+                                            self.alertBox.text = "Could not book because of: \(err)"
                                             print("Could not book because of: \(err)")
                                         } else {
+                                            self.alertBox.text = "Slot booked!"
                                             print("Slot booked!")
                                         }
                                     }
                                 } else {
+                                    self.alertBox.text = "already booked"
                                     print("already booked")
                                 }
                             }
