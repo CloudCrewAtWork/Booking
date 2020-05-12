@@ -19,7 +19,7 @@ class FinalViewController: UIViewController {
     
     @IBOutlet weak var alertBox: UILabel!
     @IBAction func bookASlot(_ sender: UIButton) {
-        
+        var serialNumber = 0
         let date = Date()
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -43,6 +43,7 @@ class FinalViewController: UIViewController {
                             if let error = err {
                                 print(error)
                             } else {
+                                
                                 //there can, if any, only be one prior booking
                                 if (querySnapshot?.count == 0) {
                                     //None found -> book slot
@@ -51,12 +52,26 @@ class FinalViewController: UIViewController {
                                         "time": dateString,
                                         "uniqueId": id!,
                                         "written": true
-
+                                        
                                     ]) { err in
                                         if let err = err {
                                             self.alertBox.text = "Could not book because of: \(err)"
                                             print("Could not book because of: \(err)")
                                         } else {
+                                            
+//                                            db.collection("TimeSlots").whereField("written", isEqualTo: true)
+//                                                .getDocuments()  { (querySnapshot, err) in
+//                                                    if err != nil {
+//                                                        print("Error getting documents: \(err)")
+//                                                    } else {
+//                                                        for document in querySnapshot!.documents {
+//                                                            serialNumber += 1
+//
+//                                                        }
+//                                                    }
+//                                            }
+//                                            print(serialNumber)
+
                                             self.alertBox.text = "Slot booked!"
                                             print("Slot booked!")
                                         }
@@ -81,3 +96,5 @@ class FinalViewController: UIViewController {
         }
     }
 }
+
+

@@ -35,7 +35,7 @@ class ViewController: UIViewController {
 }
 
 private func deleteDocument(){
-    var docCount = 0
+//    var docCount = 0
 
     db.collection("TimeSlots").whereField("written", isEqualTo: true)
     .getDocuments() { (querySnapshot, err) in
@@ -43,15 +43,16 @@ private func deleteDocument(){
             print("Error getting documents: (err)")
         } else {
             for document in querySnapshot!.documents {
-                docCount = querySnapshot?.count as! Int
                 let c = document.documentID
                 db.collection("TimeSlots").document(c).delete()
             }
-            print(docCount)
-        
+//            docCount = querySnapshot?.count as! Int
+//            print(docCount)
+
         }
 }
 }
+
 
 private func exampleData() {
     // [START example_data]
