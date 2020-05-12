@@ -15,7 +15,6 @@ class AdminLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
-        navigationItem.hidesBackButton = true
 
         
     }
