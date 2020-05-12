@@ -19,18 +19,6 @@ class FinalViewController: UIViewController {
     
     @IBOutlet weak var alertBox: UILabel!
     @IBAction func bookASlot(_ sender: UIButton) {
-        let currentUser = Auth.auth().currentUser
-        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-            if error != nil {
-            // Handle error
-            return;
-          }
-            print(idToken as Any)
-          // Send token to your backend via HTTPS
-          // ...
-        }
-        
-        
         let date = Date()
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"

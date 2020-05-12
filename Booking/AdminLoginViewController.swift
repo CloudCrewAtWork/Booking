@@ -15,6 +15,7 @@ class AdminLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
+        navigationItem.hidesBackButton = true
 
         
     }
@@ -30,11 +31,11 @@ class AdminLoginViewController: UIViewController {
                 if querySnapshot?.count == 1{
                     
                     self.performSegue(withIdentifier: "adminHomePage", sender: self)
-                    print("document found")
+                    print("Aid found")
 
                     
                 }else{
-                    print("document not found")
+                    print("Aid not found")
                 }
 //                self.performSegue(withIdentifier: "adminHomePage", sender: self)
 

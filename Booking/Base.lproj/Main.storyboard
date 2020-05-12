@@ -334,10 +334,10 @@
             </objects>
             <point key="canvasLocation" x="138" y="1130"/>
         </scene>
-        <!--View Controller-->
+        <!--Admin Home View Controller-->
         <scene sceneID="vIm-41-IoW">
             <objects>
-                <viewController id="9Jf-Ku-T5s" sceneMemberID="viewController">
+                <viewController id="9Jf-Ku-T5s" customClass="adminHomeViewController" customModule="Booking" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="abM-G7-igV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -348,17 +348,34 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpv-YH-Cub">
+                                <rect key="frame" x="137" y="256" width="141" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Slot Delete"/>
+                                <connections>
+                                    <action selector="deleteSlotPressed:" destination="9Jf-Ku-T5s" eventType="touchUpInside" id="NKP-Xn-hxz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
+                            <constraint firstItem="Wpv-YH-Cub" firstAttribute="top" secondItem="7Zs-Oh-tTI" secondAttribute="top" constant="168" id="TyL-od-htX"/>
                             <constraint firstItem="59b-UF-oOo" firstAttribute="centerX" secondItem="abM-G7-igV" secondAttribute="centerX" id="VIw-s2-cPE"/>
                             <constraint firstItem="59b-UF-oOo" firstAttribute="top" secondItem="7Zs-Oh-tTI" secondAttribute="top" constant="320" id="WQA-4J-aym"/>
+                            <constraint firstItem="Wpv-YH-Cub" firstAttribute="centerX" secondItem="59b-UF-oOo" secondAttribute="centerX" id="Xdq-6i-DTb"/>
+                            <constraint firstItem="Wpv-YH-Cub" firstAttribute="leading" secondItem="7Zs-Oh-tTI" secondAttribute="leading" constant="137" id="XrU-8m-GCh"/>
                             <constraint firstItem="59b-UF-oOo" firstAttribute="centerY" secondItem="abM-G7-igV" secondAttribute="centerY" id="jcx-aS-8Jg"/>
                             <constraint firstItem="59b-UF-oOo" firstAttribute="leading" secondItem="7Zs-Oh-tTI" secondAttribute="leading" constant="45" id="ytM-eU-oyW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Zs-Oh-tTI"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WKu-vr-o3L"/>
+                    <navigationItem key="navigationItem" id="WKu-vr-o3L">
+                        <barButtonItem key="rightBarButtonItem" title="Log out" id="mcK-Kg-2k0">
+                            <connections>
+                                <action selector="logOutPressed:" destination="9Jf-Ku-T5s" id="DHm-4K-2a1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISe-gu-IdH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
