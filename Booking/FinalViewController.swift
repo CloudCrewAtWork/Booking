@@ -10,15 +10,62 @@ import Firebase
 
 class FinalViewController: UIViewController {
     
+    
+    
+    // counters/${ID}
+    struct Counter {
+        let numShards: Int
+
+        init(numShards: Int) {
+            self.numShards = numShards
+        }
+    }
+
+    // counters/${ID}/shards/${NUM}
+    struct Shard {
+        let count: Int
+
+        init(count: Int) {
+            self.count = count
+        }
+    }
+    
+   
+    
+    
+    @IBOutlet weak var bookASlot: UIButton!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
         
+            //if the required number of slots are filled disable the Book a slot button and print it to the screen
+        
+        db.collection("Count").whereField("log", isLessThanOrEqualTo: 3 )
+            .getDocuments()  { (arrayCount, err) in
+                if err != nil {
+                    print("Error getting documents: \(String(describing: err))")
+                } else {
+                    if(arrayCount?.count == 0){
+//                        self.bookASlot.isHidden = true
+                        self.bookASlot.isEnabled = false
+                        self.alertBox.text = "All slots for the day are booked please try later"
+                        
+                    }else{
+                        print("something")
+                    }
+                }
+        }
+        
+        
     }
     
     @IBOutlet weak var alertBox: UILabel!
     @IBAction func bookASlot(_ sender: UIButton) {
+        var serialNumber = 0
         let date = Date()
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -36,12 +83,29 @@ class FinalViewController: UIViewController {
                     let name = document?.documentID
                     let id = document?.get("uniqueId")
                     
+
                     db.collection("TimeSlots")
                         .whereField("name", isEqualTo: name!)
                         .getDocuments { (querySnapshot, err) in
                             if let error = err {
                                 print(error)
                             } else {
+                                
+                                //MARK: - To get the position of the document and displaying the slots accordingly
+                                
+                                db.collection("TimeSlots").whereField("written", isEqualTo: true)
+                                                .getDocuments()  { (arrayCount, err) in
+                                                    if err != nil {
+                                                        print("Error getting documents: \(String(describing: err))")
+                                                    } else {
+
+                                                        for _ in arrayCount!.documents {
+                                                            serialNumber += 1
+
+                                                        }
+                                                        print("userNumber:",serialNumber)
+                                                    }
+                                            }
                                 
                                 //there can, if any, only be one prior booking
                                 if (querySnapshot?.count == 0) {
@@ -57,20 +121,8 @@ class FinalViewController: UIViewController {
                                             self.alertBox.text = "Could not book because of: \(err)"
                                             print("Could not book because of: \(err)")
                                         } else {
-                                            
-//                                            db.collection("TimeSlots").whereField("written", isEqualTo: true)
-//                                                .getDocuments()  { (querySnapshot, err) in
-//                                                    if err != nil {
-//                                                        print("Error getting documents: \(err)")
-//                                                    } else {
-//                                                        for document in querySnapshot!.documents {
-//                                                            serialNumber += 1
-//
-//                                                        }
-//                                                    }
-//                                            }
-//                                            print(serialNumber)
-
+                                            // Incrementing the count value as soon as a new slot is booked (IT GIVES US THE TOTAL NUMBER OF SLOTS BOOKED VALUE)
+                                            db.collection("Count").document("count").updateData(["log" : FieldValue.increment(Int64(1))])
                                             self.alertBox.text = "Slot booked!"
                                             print("Slot booked!")
                                         }

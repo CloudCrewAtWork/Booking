@@ -15,16 +15,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="54" translatesAutoresizingMaskIntoConstraints="NO" id="one-Cb-Xxl">
-                                <rect key="frame" x="73" y="193" width="268" height="357.33333333333326"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="54" translatesAutoresizingMaskIntoConstraints="NO" id="one-Cb-Xxl">
+                                <rect key="frame" x="73" y="236.99999999999997" width="267.33333333333331" height="357.33333333333326"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Cafeteria Bookings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nBl-Ao-cSV">
-                                        <rect key="frame" x="0.33333333333334281" y="0.0" width="267.33333333333326" height="39.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="267.33333333333331" height="39.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTP-RP-qBf">
-                                        <rect key="frame" x="68.666666666666657" y="93.666666666666686" width="131" height="47"/>
+                                        <rect key="frame" x="68.333333333333343" y="93.666666666666686" width="131" height="47"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                         <state key="normal" title="REGISTER"/>
                                         <userDefinedRuntimeAttributes>
@@ -37,7 +37,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Noi-s8-jcX">
-                                        <rect key="frame" x="84" y="194.66666666666663" width="100" height="46.666666666666657"/>
+                                        <rect key="frame" x="83.666666666666657" y="194.66666666666669" width="100" height="46.666666666666657"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="SIGN IN">
@@ -55,7 +55,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="83q-Ws-xTL">
-                                        <rect key="frame" x="53" y="295.33333333333337" width="162" height="62"/>
+                                        <rect key="frame" x="52.666666666666686" y="295.33333333333337" width="162" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="62" id="crG-Pc-Q9G"/>
                                         </constraints>
@@ -70,9 +70,8 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="one-Cb-Xxl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="292" id="ZhA-G0-8LH"/>
                             <constraint firstItem="one-Cb-Xxl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="73" id="miX-0U-8o3"/>
-                            <constraint firstItem="one-Cb-Xxl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="y3i-s9-YQI"/>
+                            <constraint firstItem="one-Cb-Xxl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="149" id="sUB-2V-8W3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -234,7 +233,7 @@
                                     <action selector="bookASlot:" destination="qvB-e7-IQA" eventType="touchUpInside" id="6Lm-JL-ctE"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Box!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRm-Ob-Rob">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Box!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRm-Ob-Rob">
                                 <rect key="frame" x="161" y="619" width="104.66666666666669" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -264,11 +263,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="alertBox" destination="qRm-Ob-Rob" id="8qQ-mg-seN"/>
+                        <outlet property="bookASlot" destination="hhn-7G-fAe" id="LFJ-6B-17V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NyG-jR-2hH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3389.8550724637685" y="137.94642857142856"/>
+            <point key="canvasLocation" x="3364" y="138"/>
         </scene>
         <!--Admin Login View Controller-->
         <scene sceneID="e0z-Hw-aVA">
@@ -342,13 +342,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Admin stuff" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59b-UF-oOo">
-                                <rect key="frame" x="45" y="408" width="325" height="80"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="67"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpv-YH-Cub">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpv-YH-Cub">
                                 <rect key="frame" x="137" y="256" width="141" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Slot Delete"/>
@@ -356,16 +350,17 @@
                                     <action selector="deleteSlotPressed:" destination="9Jf-Ku-T5s" eventType="touchUpInside" id="NKP-Xn-hxz"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hks-A7-urP">
+                                <rect key="frame" x="225" y="413" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
                             <constraint firstItem="Wpv-YH-Cub" firstAttribute="top" secondItem="7Zs-Oh-tTI" secondAttribute="top" constant="168" id="TyL-od-htX"/>
-                            <constraint firstItem="59b-UF-oOo" firstAttribute="centerX" secondItem="abM-G7-igV" secondAttribute="centerX" id="VIw-s2-cPE"/>
-                            <constraint firstItem="59b-UF-oOo" firstAttribute="top" secondItem="7Zs-Oh-tTI" secondAttribute="top" constant="320" id="WQA-4J-aym"/>
-                            <constraint firstItem="Wpv-YH-Cub" firstAttribute="centerX" secondItem="59b-UF-oOo" secondAttribute="centerX" id="Xdq-6i-DTb"/>
                             <constraint firstItem="Wpv-YH-Cub" firstAttribute="leading" secondItem="7Zs-Oh-tTI" secondAttribute="leading" constant="137" id="XrU-8m-GCh"/>
-                            <constraint firstItem="59b-UF-oOo" firstAttribute="centerY" secondItem="abM-G7-igV" secondAttribute="centerY" id="jcx-aS-8Jg"/>
-                            <constraint firstItem="59b-UF-oOo" firstAttribute="leading" secondItem="7Zs-Oh-tTI" secondAttribute="leading" constant="45" id="ytM-eU-oyW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Zs-Oh-tTI"/>
                     </view>
@@ -486,6 +481,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kbO-fk-xsx"/>
+        <segue reference="9UJ-qG-ful"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -34,11 +34,13 @@ class adminHomeViewController: UIViewController {
     @IBAction func deleteSlotPressed(_ sender: UIButton) {
         
         deleteDocument()
+//        createCounter(ref: db.collection("TimeSlots").document(), numShards: 1)
     }
     
 }
 private func deleteDocument(){
 //    var docCount = 0
+    db.collection("Count").document("count").setData(["log" : 0])
 
     db.collection("TimeSlots").whereField("written", isEqualTo: true)
     .getDocuments() { (querySnapshot, err) in
@@ -55,3 +57,10 @@ private func deleteDocument(){
         }
 }
 }
+//func createCounter(ref: DocumentReference, numShards: Int) {
+//    ref.setData(["numShards": numShards]){ (err) in
+//        for i in 0...numShards {
+//            ref.collection("shards").document(String(i)).setData(["count": 0])
+//        }
+//    }
+//}
