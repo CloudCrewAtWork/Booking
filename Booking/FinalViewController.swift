@@ -65,6 +65,8 @@ class FinalViewController: UIViewController {
     
     @IBOutlet weak var alertBox: UILabel!
     @IBAction func bookASlot(_ sender: UIButton) {
+        let h = totalPersonLimit()
+        print("MaxPeopleLimit: ",h)
         var serialNumber = 0
         let date = Date()
         let df = DateFormatter()

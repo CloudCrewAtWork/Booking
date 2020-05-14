@@ -8,54 +8,126 @@
 
 import UIKit
 import Firebase
+var c = 0
+var es = 0
+var pps = 0
+
+
 
 class adminHomeViewController: UIViewController {
-
+    
+    
+    
+    @IBOutlet weak var openingTimeSet: UITextField!
+    @IBOutlet weak var closingTimeSet: UITextField!
+    @IBOutlet weak var eachSlotTiming: UITextField!
+    @IBOutlet weak var peoplePerSlotSet: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
-
+        
+        
+        
+        
+        //        let formatter = DateComponentsFormatter()
+        //        formatter.allowedUnits = [.hour, .minute]
+        
     }
     
-
+    
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
         
         do {
-                try Auth.auth().signOut()
-                navigationController?.popToRootViewController(animated: true)
-                
-            } catch let signOutError as NSError {
-                print ("Error signing out: %@", signOutError)
-            }
+            try Auth.auth().signOut()
+            navigationController?.popToRootViewController(animated: true)
+            
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
         
     }
     
     @IBAction func deleteSlotPressed(_ sender: UIButton) {
         
         deleteDocument()
-//        createCounter(ref: db.collection("TimeSlots").document(), numShards: 1)
+        //        createCounter(ref: db.collection("TimeSlots").document(), numShards: 1)
     }
+    
+    
+    @IBAction func setFieldsPressed(_ sender: UIButton) {
+        let timeFormatter = DateFormatter()
+        timeFormatter.timeStyle = .short
+        timeFormatter.dateFormat = "HH:mm"
+        let time1 = timeFormatter.date(from: openingTimeSet.text!)
+        let time2 = timeFormatter.date(from: closingTimeSet.text!)
+        
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute]
+        print(formatter.string(from: time1!, to: time2!)!)
+      
+        
+        
+        
+        print(time1! , time2!)
+        let interval = time2?.timeIntervalSince(time1!)
+        print(interval!)
+        
+        c = Int(interval!)
+        print(c)
+        
+        
+        let openTime = openingTimeSet.text!
+        let closeTime = closingTimeSet.text!
+        let eachSlotTime = eachSlotTiming.text!
+        es = Int(eachSlotTime)!
+        let personPerSlot = peoplePerSlotSet.text!
+        pps = Int(personPerSlot)!
+        if (openTime != "" && closeTime != "" && eachSlotTime != "" && personPerSlot != ""){
+            
+            db.collection("Scheduler").document("VariousFields").setData([
+                "OpenTime"  :   time1!,
+                "CloseTime" : time2!,
+                "eachSlotTime" : Int(eachSlotTime)!,
+                "personPerSlot" : Int(personPerSlot)!
+            ])
+            
+            
+            
+            
+            
+        }else{
+            print("Please fill all the fields!")
+        }
+        
+        
+        
+    }
+    
     
 }
 private func deleteDocument(){
-//    var docCount = 0
+    //    var docCount = 0
     db.collection("Count").document("count").setData(["log" : 0])
-
+    
     db.collection("TimeSlots").whereField("written", isEqualTo: true)
-    .getDocuments() { (querySnapshot, err) in
-        if err != nil {
-            print("Error getting documents: (err)")
-        } else {
-            for document in querySnapshot!.documents {
-                let c = document.documentID
-                db.collection("TimeSlots").document(c).delete()
+        .getDocuments() { (querySnapshot, err) in
+            if err != nil {
+                print("Error getting documents: (err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let c = document.documentID
+                    db.collection("TimeSlots").document(c).delete()
+                }
+                //            docCount = querySnapshot?.count as! Int
+                //            print(docCount)
+                
             }
-//            docCount = querySnapshot?.count as! Int
-//            print(docCount)
-
-        }
-}
+    }
+    
+   
+    
 }
 //func createCounter(ref: DocumentReference, numShards: Int) {
 //    ref.setData(["numShards": numShards]){ (err) in
@@ -64,3 +136,9 @@ private func deleteDocument(){
 //        }
 //    }
 //}
+func totalPersonLimit() -> Int {
+    print("values:",c,es,pps)
+       let total = 0 //((c/60)/es)*pps
+       return total
+   }
+
