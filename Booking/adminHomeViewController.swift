@@ -94,11 +94,11 @@ class adminHomeViewController: UIViewController {
               print(c!)
             
             db.collection("Scheduler").document("VariousFields").setData([
-                "OpenTime"  :   time1!,
-                "CloseTime" : time2!,
+//                "OpenTime"  :   time1!,
+//                "CloseTime" : time2!,
                 "eachSlotTime" : Int(eachSlotTime)!,
                 "personPerSlot" : Int(personPerSlot)!,
-                "TimeDifference" : c!/60
+                "MaxPeopleLimit" : (c!/3600)*Int(personPerSlot)!
             ])
             
             
