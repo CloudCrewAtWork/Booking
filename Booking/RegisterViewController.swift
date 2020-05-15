@@ -36,6 +36,9 @@ class RegisterViewController: UIViewController {
                 } else {
                     if (querySnapshot?.count == 0) {
                         //query was succesful, but is empty -> uid not found
+                        let alert = UIAlertController(title: "Alert", message: "UniqueId Not Found", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                         print("Uid not valid")
                     } else {
                         //Found Uid in collection -> UId valid
@@ -53,6 +56,9 @@ class RegisterViewController: UIViewController {
                                                 print("Error  creating user")
                                             } else {
                                                 print("Registration success")
+//                                                let alert = UIAlertController(title: "Alert", message: "Registration Successful", preferredStyle: UIAlertController.Style.alert)
+//                                                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+//                                                self.present(alert, animated: true, completion: nil)
                                                 self.performSegue(withIdentifier: "goToBooking", sender: self)
                                                 
                                                 db.collection("Users").document(c.name).setData([
@@ -72,6 +78,9 @@ class RegisterViewController: UIViewController {
                                     }
                                     else {
                                         //search result found a user who has the provided id -> invalid
+                                        let alert = UIAlertController(title: "Alert", message: "ID already taken", preferredStyle: UIAlertController.Style.alert)
+                                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                        self.present(alert, animated: true, completion: nil)
                                         print("ID alreay taken")
                                     }
                                 }
