@@ -8,13 +8,18 @@
 
 import UIKit
 import Firebase
-var c = 0
-var es = 0
-var pps = 0
+
 
 
 
 class adminHomeViewController: UIViewController {
+    
+    
+    var c : Int?
+    var es : Int?
+    var pps : Int?
+    var time1 : Date?
+    var time2 : Date?
     
     
     
@@ -56,41 +61,44 @@ class adminHomeViewController: UIViewController {
     
     
     @IBAction func setFieldsPressed(_ sender: UIButton) {
-        let timeFormatter = DateFormatter()
-        timeFormatter.timeStyle = .short
-        timeFormatter.dateFormat = "HH:mm"
-        let time1 = timeFormatter.date(from: openingTimeSet.text!)
-        let time2 = timeFormatter.date(from: closingTimeSet.text!)
-        
-        
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute]
-        print(formatter.string(from: time1!, to: time2!)!)
-      
-        
-        
-        
-        print(time1! , time2!)
-        let interval = time2?.timeIntervalSince(time1!)
-        print(interval!)
-        
-        c = Int(interval!)
-        print(c)
-        
-        
         let openTime = openingTimeSet.text!
         let closeTime = closingTimeSet.text!
         let eachSlotTime = eachSlotTiming.text!
-        es = Int(eachSlotTime)!
         let personPerSlot = peoplePerSlotSet.text!
-        pps = Int(personPerSlot)!
+        
+       
+        
+        
         if (openTime != "" && closeTime != "" && eachSlotTime != "" && personPerSlot != ""){
+            
+            
+            let timeFormatter = DateFormatter()
+              timeFormatter.timeStyle = .short
+              timeFormatter.dateFormat = "HH:mm"
+              time1 = timeFormatter.date(from: openingTimeSet.text!)
+              time2 = timeFormatter.date(from: closingTimeSet.text!)
+              
+              
+              let formatter = DateComponentsFormatter()
+              formatter.allowedUnits = [.hour, .minute]
+              print(formatter.string(from: time1!, to: time2!)!)
+            
+              
+              
+              
+              print(time1! , time2!)
+              let interval = time2?.timeIntervalSince(time1!)
+              print(interval!)
+              
+              c = Int(interval!)
+              print(c!)
             
             db.collection("Scheduler").document("VariousFields").setData([
                 "OpenTime"  :   time1!,
                 "CloseTime" : time2!,
                 "eachSlotTime" : Int(eachSlotTime)!,
-                "personPerSlot" : Int(personPerSlot)!
+                "personPerSlot" : Int(personPerSlot)!,
+                "TimeDifference" : c!/60
             ])
             
             
@@ -98,12 +106,21 @@ class adminHomeViewController: UIViewController {
             
             
         }else{
+            let alert = UIAlertController(title: "Alert", message: "Please fill all the fields!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             print("Please fill all the fields!")
         }
         
         
         
     }
+    func totalPersonLimit() -> Int {
+       print("values:",c!,es!,pps!)
+        print("hello:",c!)
+          let total = 0 //((c/60)/es)*pps
+          return total
+      }
     
     
 }
@@ -126,8 +143,6 @@ private func deleteDocument(){
             }
     }
     
-   
-    
 }
 //func createCounter(ref: DocumentReference, numShards: Int) {
 //    ref.setData(["numShards": numShards]){ (err) in
@@ -136,9 +151,5 @@ private func deleteDocument(){
 //        }
 //    }
 //}
-func totalPersonLimit() -> Int {
-    print("values:",c,es,pps)
-       let total = 0 //((c/60)/es)*pps
-       return total
-   }
+
 

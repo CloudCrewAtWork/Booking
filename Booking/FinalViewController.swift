@@ -10,29 +10,41 @@ import Firebase
 
 class FinalViewController: UIViewController {
     
+    var displayTime  = 0
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult"{
+            let destinationVc = segue.destination as! adminHomeViewController
+            displayTime = destinationVc.c!
+            print(destinationVc.c!)
+        }
+    }
+    
     
     
     // counters/${ID}
-    struct Counter {
-        let numShards: Int
-
-        init(numShards: Int) {
-            self.numShards = numShards
-        }
-    }
-
-    // counters/${ID}/shards/${NUM}
-    struct Shard {
-        let count: Int
-
-        init(count: Int) {
-            self.count = count
-        }
-    }
+//    struct Counter {
+//        let numShards: Int
+//
+//        init(numShards: Int) {
+//            self.numShards = numShards
+//        }
+//    }
+//
+//    // counters/${ID}/shards/${NUM}
+//    struct Shard {
+//        let count: Int
+//
+//        init(count: Int) {
+//            self.count = count
+//        }
+//    }
     
    
     
     
+    @IBOutlet weak var timeDisplay: UILabel!
     @IBOutlet weak var bookASlot: UIButton!
     
     
@@ -43,7 +55,7 @@ class FinalViewController: UIViewController {
         navigationItem.hidesBackButton = true
         
             //if the required number of slots are filled disable the Book a slot button and print it to the screen
-        
+        print(displayTime)
         db.collection("Count").whereField("log", isLessThanOrEqualTo: 3 )
             .getDocuments()  { (arrayCount, err) in
                 if err != nil {
@@ -52,7 +64,10 @@ class FinalViewController: UIViewController {
                     if(arrayCount?.count == 0){
 //                        self.bookASlot.isHidden = true
                         self.bookASlot.isEnabled = false
-                        self.alertBox.text = "All slots for the day are booked please try later"
+//                        self.alertBox.text = "All slots for the day are booked please try later"
+                        let alert = UIAlertController(title: "Alert", message: "All slots for the day are booked please try later", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                         
                     }else{
                         print("something")
@@ -65,8 +80,8 @@ class FinalViewController: UIViewController {
     
     @IBOutlet weak var alertBox: UILabel!
     @IBAction func bookASlot(_ sender: UIButton) {
-        let h = totalPersonLimit()
-        print("MaxPeopleLimit: ",h)
+//        let h = totalPersonLimit()
+//        print("MaxPeopleLimit: ",h)
         var serialNumber = 0
         let date = Date()
         let df = DateFormatter()
@@ -122,16 +137,23 @@ class FinalViewController: UIViewController {
                                         if let err = err {
                                             self.alertBox.text = "Could not book because of: \(err)"
                                             print("Could not book because of: \(err)")
+                                            
                                         } else {
                                             // Incrementing the count value as soon as a new slot is booked (IT GIVES US THE TOTAL NUMBER OF SLOTS BOOKED VALUE)
                                             db.collection("Count").document("count").updateData(["log" : FieldValue.increment(Int64(1))])
                                             self.alertBox.text = "Slot booked!"
                                             print("Slot booked!")
+                                            let alert = UIAlertController(title: "Alert", message: "Slot Booked! SlotNo: \(serialNumber/15)", preferredStyle: UIAlertController.Style.alert)
+                                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                            self.present(alert, animated: true, completion: nil)
                                         }
                                     }
                                 } else {
                                     self.alertBox.text = "already booked"
                                     print("already booked")
+                                    let alert = UIAlertController(title: "Alert", message: "You Already Booked A Slot", preferredStyle: UIAlertController.Style.alert)
+                                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                    self.present(alert, animated: true, completion: nil)
                                 }
                             }
                     }
@@ -142,12 +164,17 @@ class FinalViewController: UIViewController {
     @IBAction func logoutPressed(_ sender: UIBarButtonItem) {
         do {
             try Auth.auth().signOut()
+            
             navigationController?.popToRootViewController(animated: true)
             
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
     }
+    
+    
+    
+    
 }
 
 

@@ -264,6 +264,7 @@
                     <connections>
                         <outlet property="alertBox" destination="qRm-Ob-Rob" id="8qQ-mg-seN"/>
                         <outlet property="bookASlot" destination="hhn-7G-fAe" id="LFJ-6B-17V"/>
+                        <outlet property="timeDisplay" destination="b8c-Fw-bNh" id="LiR-0O-b6i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NyG-jR-2hH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
