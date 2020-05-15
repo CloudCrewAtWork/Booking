@@ -141,9 +141,9 @@ class FinalViewController: UIViewController {
                                         } else {
                                             // Incrementing the count value as soon as a new slot is booked (IT GIVES US THE TOTAL NUMBER OF SLOTS BOOKED VALUE)
                                             db.collection("Count").document("count").updateData(["log" : FieldValue.increment(Int64(1))])
-                                            self.alertBox.text = "Slot booked!"
+                                            self.alertBox.text = "Slot booked! SlotNo: \((serialNumber/15)+1)"
                                             print("Slot booked!")
-                                            let alert = UIAlertController(title: "Alert", message: "Slot Booked! SlotNo: \(serialNumber/15)", preferredStyle: UIAlertController.Style.alert)
+                                            let alert = UIAlertController(title: "Alert", message: "Slot Booked! SlotNo: \((serialNumber/15)+1)", preferredStyle: UIAlertController.Style.alert)
                                             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                                             self.present(alert, animated: true, completion: nil)
                                         }
