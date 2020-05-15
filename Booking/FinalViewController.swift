@@ -10,36 +10,10 @@ import Firebase
 
 class FinalViewController: UIViewController {
     
-    var displayTime  = 0
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToResult"{
-            let destinationVc = segue.destination as! adminHomeViewController
-            displayTime = destinationVc.c!
-            print(destinationVc.c!)
-        }
-    }
     
     
     
-    // counters/${ID}
-//    struct Counter {
-//        let numShards: Int
-//
-//        init(numShards: Int) {
-//            self.numShards = numShards
-//        }
-//    }
-//
-//    // counters/${ID}/shards/${NUM}
-//    struct Shard {
-//        let count: Int
-//
-//        init(count: Int) {
-//            self.count = count
-//        }
-//    }
+
     
    
     
@@ -50,12 +24,12 @@ class FinalViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
         
-            //if the required number of slots are filled disable the Book a slot button and print it to the screen
-        print(displayTime)
+            //if the required number of slots are filled disable the Book a slot button and print it to the scree
         db.collection("Count").whereField("log", isLessThanOrEqualTo: 3 )
             .getDocuments()  { (arrayCount, err) in
                 if err != nil {

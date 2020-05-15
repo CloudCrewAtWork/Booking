@@ -20,7 +20,7 @@ class adminHomeViewController: UIViewController {
     var pps : Int?
     var time1 : Date?
     var time2 : Date?
-    
+    var a : [QueryDocumentSnapshot]?
     
     
     @IBOutlet weak var openingTimeSet: UITextField!
@@ -31,6 +31,20 @@ class adminHomeViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
+        db.collection("TimeSlots").order(by: "time").getDocuments(){(querySnapshot,err) in
+            if err != nil{
+                print(err!)
+            }else{
+                for doc in querySnapshot!.documents{
+//                    self.a?.append(doc)
+                    print(doc.get("name")!,":",doc.get("uniqueId")!)
+                
+                }
+            }
+            
+        }
+        
+
         
         
         
