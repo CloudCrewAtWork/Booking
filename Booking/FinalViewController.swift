@@ -117,6 +117,17 @@ class FinalViewController: UIViewController {
                                             db.collection("Count").document("count").updateData(["log" : FieldValue.increment(Int64(1))])
                                             self.alertBox.text = "Slot booked! SlotNo: \((serialNumber/15)+1)"
                                             print("Slot booked!")
+                                            let currentUser = Auth.auth().currentUser?.email!
+                                            db.collection("User").whereField("email", isEqualTo: currentUser!).getDocuments(){ (querySnapshot, err) in
+                                            if let err = err {
+                                                print("Error getting documents: \(err)")
+                                            } else {
+                                                
+                                                querySnapshot?.setValue((serialNumber/15)+1, forKey: "SlotDetail")
+                                                
+                                                }
+                                            }
+                                        
                                             let alert = UIAlertController(title: "Alert", message: "Slot Booked! SlotNo: \((serialNumber/15)+1)", preferredStyle: UIAlertController.Style.alert)
                                             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                                             self.present(alert, animated: true, completion: nil)
