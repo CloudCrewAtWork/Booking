@@ -30,7 +30,7 @@ class FinalViewController: UIViewController {
         navigationItem.hidesBackButton = true
         
             //if the required number of slots are filled disable the Book a slot button and print it to the scree
-        db.collection("Count").whereField("log", isLessThanOrEqualTo: 3 )
+        db.collection("Count").whereField("log", isLessThanOrEqualTo: 4 )
             .getDocuments()  { (arrayCount, err) in
                 if err != nil {
                     print("Error getting documents: \(String(describing: err))")
@@ -102,10 +102,13 @@ class FinalViewController: UIViewController {
                                 if (querySnapshot?.count == 0) {
                                     //None found -> book slot
                                     db.collection("TimeSlots").document(name!).setData([
-                                        "name": name as Any,
+                                        
+                                        "name": name! as Any,
                                         "time": dateString,
                                         "uniqueId": id!,
-                                        "written": true
+                                        "written": true,
+                                        "SlotDetail" : 0,
+                                        "email" : Auth.auth().currentUser?.email! as Any
                                         
                                     ]) { err in
                                         if let err = err {
@@ -117,14 +120,17 @@ class FinalViewController: UIViewController {
                                             db.collection("Count").document("count").updateData(["log" : FieldValue.increment(Int64(1))])
                                             self.alertBox.text = "Slot booked! SlotNo: \((serialNumber/15)+1)"
                                             print("Slot booked!")
+                                            
+                                            //trying to add slot details
+                                            
                                             let currentUser = Auth.auth().currentUser?.email!
-                                            db.collection("User").whereField("email", isEqualTo: currentUser!).getDocuments(){ (querySnapshot, err) in
+                                            db.collection("TimeSlots").whereField("email", isEqualTo: currentUser!).getDocuments(){ (querySnapshot, err) in
                                             if let err = err {
                                                 print("Error getting documents: \(err)")
                                             } else {
-                                                
-                                                querySnapshot?.setValue((serialNumber/15)+1, forKey: "SlotDetail")
-                                                
+
+                                                db.collection("TimeSlots").document(name!).updateData(["SlotDetail" : (serialNumber/15)+1])
+
                                                 }
                                             }
                                         
