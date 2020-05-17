@@ -91,10 +91,13 @@ class FinalViewController: UIViewController {
                                                     } else {
 
                                                         for _ in arrayCount!.documents {
+                                                            
                                                             serialNumber += 1
-
+                                                            
                                                         }
+                                                        
                                                         print("userNumber:",serialNumber)
+                                                        
                                                     }
                                             }
                                 
