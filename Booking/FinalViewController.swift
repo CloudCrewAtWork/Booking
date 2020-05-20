@@ -31,7 +31,7 @@ class FinalViewController: UIViewController {
         
             //if the required number of slots are filled disable the Book a slot button and print it to the scree
         db.collection("Count").whereField("log", isLessThanOrEqualTo: 4 )
-            .getDocuments()  { (arrayCount, err) in
+            .getDocuments()  { (arrayCount, err) in 
                 if err != nil {
                     print("Error getting documents: \(String(describing: err))")
                 } else {
@@ -63,6 +63,7 @@ class FinalViewController: UIViewController {
         let dateString = df.string(from: date)
         let userMail = Auth.auth().currentUser?.email!
         //search user table for entry that matches the current users email
+        
         db.collection("Users").whereField("email", isEqualTo: userMail as Any )
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {

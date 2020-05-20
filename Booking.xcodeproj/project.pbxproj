@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2353965C247599BA006E69F6 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2353965B247599BA006E69F6 /* ListTableViewController.swift */; };
+		2353965E2475A716006E69F6 /* TimeSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2353965D2475A716006E69F6 /* TimeSlots.swift */; };
 		2354A14C2466B0CF00F5D8B8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354A14B2466B0CF00F5D8B8 /* User.swift */; };
 		23875DB72462E50900059C1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23875DB62462E50900059C1B /* AppDelegate.swift */; };
 		23875DB92462E50900059C1B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23875DB82462E50900059C1B /* SceneDelegate.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2353965B247599BA006E69F6 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		2353965D2475A716006E69F6 /* TimeSlots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlots.swift; sourceTree = "<group>"; };
 		2354A14B2466B0CF00F5D8B8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		23875DB32462E50900059C1B /* Booking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Booking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23875DB62462E50900059C1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 				23875DD02462F17A00059C1B /* LoginViewController.swift */,
 				23A66ED8246AF43D009D4F90 /* AdminLoginViewController.swift */,
 				23875DBC2462E50900059C1B /* Main.storyboard */,
+				2353965D2475A716006E69F6 /* TimeSlots.swift */,
+				2353965B247599BA006E69F6 /* ListTableViewController.swift */,
 				23A66EDA246B1728009D4F90 /* adminHomeViewController.swift */,
 				2354A14B2466B0CF00F5D8B8 /* User.swift */,
 				23875DD22462F6BD00059C1B /* FinalViewController.swift */,
@@ -231,6 +237,8 @@
 				23875DBB2462E50900059C1B /* ViewController.swift in Sources */,
 				23875DD32462F6BD00059C1B /* FinalViewController.swift in Sources */,
 				23A66EDB246B1728009D4F90 /* adminHomeViewController.swift in Sources */,
+				2353965C247599BA006E69F6 /* ListTableViewController.swift in Sources */,
+				2353965E2475A716006E69F6 /* TimeSlots.swift in Sources */,
 				23A66ED9246AF43D009D4F90 /* AdminLoginViewController.swift in Sources */,
 				23875DB72462E50900059C1B /* AppDelegate.swift in Sources */,
 				23875DB92462E50900059C1B /* SceneDelegate.swift in Sources */,
