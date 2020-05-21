@@ -32,6 +32,22 @@ class FinalViewController: UIViewController {
         navigationItem.hidesBackButton = true
         
             //if the required number of slots are filled disable the Book a slot button and print it to the scree
+        
+        db.collection("TimeSlots").whereField("email", isEqualTo: Auth.auth().currentUser?.email as Any).getDocuments(){
+        (querySnapShot,err) in
+        if err != nil {
+            print("Error getting documents: \(String(describing: err))")
+        }else{
+            for doc in querySnapShot!.documents{
+
+                slotN = doc.get("SlotDetail") as? Int
+                
+                    
+                }
+            }
+
+        }
+        
         db.collection("Count").getDocuments { (array, err) in
             if err != nil{
                 print("Error getting documents: \(String(describing: err))")
@@ -40,27 +56,15 @@ class FinalViewController: UIViewController {
                     
                     limit = (doc.get("log") as? Int)!
                     print(limit)
+                    if(slotN != nil || limit > 4){
+//                        print("second: ",limit,slotN!)
+                    self.bookASlot.isEnabled = false
+//                    self.alertBox.text = "Slot booked! SlotNo: \(slotN!)"
+                    }
                     
                 }
                 
-                db.collection("TimeSlots").whereField("email", isEqualTo: Auth.auth().currentUser?.email as Any).getDocuments(){
-                    (querySnapShot,err) in
-                    if err != nil {
-                        print("Error getting documents: \(String(describing: err))")
-                    }else{
-                        for doc in querySnapShot!.documents{
-
-                            slotN = doc.get("SlotDetail") as? Int
-                            if(slotN != nil || limit > 4){
-                                print("second: ",limit,slotN!)
-                            self.bookASlot.isEnabled = false
-                            self.alertBox.text = "Slot booked! SlotNo: \(slotN!)"
-                            }
-                                
-                            }
-                        }
-
-                    }
+                
                 }
 //                if ()
             }
