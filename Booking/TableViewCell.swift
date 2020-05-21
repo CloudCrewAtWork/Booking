@@ -13,6 +13,7 @@ class TableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var uniqueId: UILabel!
     
 
 //    override func awakeFromNib() {

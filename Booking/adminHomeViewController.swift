@@ -33,17 +33,17 @@ class adminHomeViewController: UIViewController {
         navigationItem.hidesBackButton = true
 //        db.collection("Count").ge
         
-        
-
-        
-        
-
-        
         //        let formatter = DateComponentsFormatter()
         //        formatter.allowedUnits = [.hour, .minute]
         
     }
     
+    @IBAction func viewSlotsPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "listViewSegue", sender: self)
+
+        
+        
+    }
     
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
         

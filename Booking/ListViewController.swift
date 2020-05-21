@@ -12,13 +12,16 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var listArray = [ListDetail]()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return listArray.count
+        print(listArray.count)
+        return listArray.count
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-    //        let job = listArray[indexPath.row]
-            cell.userName.text = "Hello"
+            let job = listArray[indexPath.row]
+            cell.userName.text = String(indexPath.row+1) + job.Uname! + job.id!
+            cell.uniqueId.text = String(job.slotNumber!)
+//            cell.userName.text = "Hello"
             
             return cell
         }
@@ -39,14 +42,22 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             
                             let data = ListDetail()
                             data.Uname = doc.get("name") as? String
+                            data.id = doc.get("uniqueId") as? String
+                            data.slotNumber = doc.get("SlotDetail") as? Int
                             self.listArray.append(data)
-                            print(self.listArray.count)
-//                            print(doc.get("name")!,":",doc.get("uniqueId")!)
+                            print(doc.get("name")!,":",doc.get("uniqueId")!)
                         
                         }
+                        DispatchQueue.main.async
+                                   {
+                                       self.listTable.reloadData()
+                                   }
                     }
+           
                     
                 }
+//        print(self.listArray.count)
+
 
         // Do any additional setup after loading the view.
     }
