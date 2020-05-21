@@ -38,6 +38,7 @@ class FinalViewController: UIViewController {
                     if(arrayCount?.count == 0){
 //                        self.bookASlot.isHidden = true
                         self.bookASlot.isEnabled = false
+//                        self.alertBox.text =
 //                        self.alertBox.text = "All slots for the day are booked please try later"
                         let alert = UIAlertController(title: "Alert", message: "All slots for the day are booked please try later", preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
@@ -145,8 +146,10 @@ class FinalViewController: UIViewController {
                                         }
                                     }
                                 } else {
-                                    self.alertBox.text = "already booked"
+                                    self.alertBox.text = "Slot booked! SlotNo: \((serialNumber/15)+1)"
+                                    
                                     print("already booked")
+                                    
                                     let alert = UIAlertController(title: "Alert", message: "You Already Booked A Slot", preferredStyle: UIAlertController.Style.alert)
                                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                                     self.present(alert, animated: true, completion: nil)
