@@ -52,24 +52,26 @@ class FinalViewController: UIViewController {
                         for doc in querySnapShot!.documents{
                             
                             slotN = doc.get("SlotDetail") as! Int
-                            if(limit <= 4){
-                                if(slotN != 0){
-                                    self.bookASlot.isEnabled = false
-                                    self.alertBox.text = "Slot booked! SlotNo: \(slotN)"
-                                }else{
-                                    self.bookASlot.isEnabled = true
-                                }
-                                //                        print("second: ",limit,slotN!)
-                            }else{
-                                self.bookASlot.isEnabled = false
-                            }
-                            
                             
                         }
+                        
+                    }
+                    print(slotN)
+                    if(limit <= 4 && slotN != 0 ){
+                        if(slotN != 0){
+                            self.bookASlot.isEnabled = false
+                            self.alertBox.text = "Slot booked! SlotNo: \(slotN)"
+                        }else {
+                            self.bookASlot.isEnabled = true
+                        }
+                        //                        print("second: ",limit,slotN!)
+                    }else if (limit == 4 && slotN == 0){
+                        self.bookASlot.isEnabled = false
                     }
                     
+                    
                 }
-                
+                print(slotN)
                 
                 
                 
