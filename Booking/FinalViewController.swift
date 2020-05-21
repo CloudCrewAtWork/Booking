@@ -60,6 +60,7 @@ class FinalViewController: UIViewController {
         let date = Date()
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        df.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         let dateString = df.string(from: date)
         let userMail = Auth.auth().currentUser?.email!
         //search user table for entry that matches the current users email
