@@ -24,31 +24,73 @@ class FinalViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        var limit = 0
+        var slotN : Int?
         
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
         
             //if the required number of slots are filled disable the Book a slot button and print it to the scree
-        db.collection("Count").whereField("log", isLessThanOrEqualTo: 4 )
-            .getDocuments()  { (arrayCount, err) in 
-                if err != nil {
-                    print("Error getting documents: \(String(describing: err))")
-                } else {
-                    if(arrayCount?.count == 0){
-//                        self.bookASlot.isHidden = true
-                        self.bookASlot.isEnabled = false
-//                        self.alertBox.text =
-//                        self.alertBox.text = "All slots for the day are booked please try later"
-                        let alert = UIAlertController(title: "Alert", message: "All slots for the day are booked please try later", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                        
+        db.collection("Count").getDocuments { (array, err) in
+            if err != nil{
+                print("Error getting documents: \(String(describing: err))")
+            }else{
+                for doc in array!.documents{
+                    
+                    limit = (doc.get("log") as? Int)!
+                    print(limit)
+                    
+                }
+                
+                db.collection("TimeSlots").whereField("email", isEqualTo: Auth.auth().currentUser?.email as Any).getDocuments(){
+                    (querySnapShot,err) in
+                    if err != nil {
+                        print("Error getting documents: \(String(describing: err))")
                     }else{
-                        print("something")
+                        for doc in querySnapShot!.documents{
+
+                            slotN = doc.get("SlotDetail") as? Int
+                            if(slotN != nil || limit > 4){
+                                print("second: ",limit,slotN!)
+                            self.bookASlot.isEnabled = false
+                            self.alertBox.text = "Slot booked! SlotNo: \(slotN!)"
+                            }
+                                
+                            }
+                        }
+
                     }
                 }
-        }
+//                if ()
+            }
+     
+        
+//        db.collection("Count").whereField("log", isLessThanOrEqualTo: 4 )
+//            .getDocuments()  { (arrayCount, err) in
+//                if err != nil {
+//                    print("Error getting documents: \(String(describing: err))")
+//                } else {
+//                    db.collection("TimeSlots").whereField("email", isEqualTo: Auth.auth().currentUser?.email as Any).getDocuments(){
+//                        (querySnapShot,err) in
+//                        if err != nil {
+//                            print("Error getting documents: \(String(describing: err))")
+//                        }else{
+//                            for doc in querySnapShot!.documents{
+//
+//                                let slotN = doc.get("SlotDetail") as? Int
+//
+//
+//                            }
+//
+//                        }
+//                    }
+//
+//
+//
+//
+//                }
+//        }
         
         
     }
