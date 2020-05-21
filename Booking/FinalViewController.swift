@@ -56,7 +56,6 @@ class FinalViewController: UIViewController {
                         }
                         
                     }
-                    print(slotN)
                     if(limit <= 4 && slotN != 0 ){
                         if(slotN != 0){
                             self.bookASlot.isEnabled = false
@@ -68,20 +67,13 @@ class FinalViewController: UIViewController {
                     }else if (limit == 4 && slotN == 0){
                         self.bookASlot.isEnabled = false
                     }
-                    
-                    
                 }
-                print(slotN)
                 
                 
                 
             }
-            //                if ()
         }
-//        print(limit)
-        
-        
-        
+
         //        db.collection("Count").whereField("log", isLessThanOrEqualTo: 4 )
         //            .getDocuments()  { (arrayCount, err) in
         //                if err != nil {
