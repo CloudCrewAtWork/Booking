@@ -19,7 +19,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
             let job = listArray[indexPath.row]
-            cell.userName.text = String(indexPath.row+1) + job.Uname! + job.id!
+            cell.userName.text = String(indexPath.row+1) + " " + job.Uname! + job.id!
             cell.uniqueId.text = String(job.slotNumber!)
 //            cell.userName.text = "Hello"
             

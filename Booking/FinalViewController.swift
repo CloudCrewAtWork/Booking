@@ -21,59 +21,98 @@ class FinalViewController: UIViewController {
     @IBOutlet weak var timeDisplay: UILabel!
     @IBOutlet weak var bookASlot: UIButton!
     
-    
-    
-    override func viewDidLoad() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bookASlot.isHidden = true
+        bookASlot.isEnabled = false
         var limit = 0
         var slotN = 0
+        var Slimit = 0
+        db.collection("Scheduler").getDocuments { (contents, err) in
+            if err != nil {
+                print("Error getting documents: \(String(describing: err))")
+            }else{
+                for doc in contents!.documents{
+                    
+                    Slimit = doc.get("MaxPeopleLimit") as! Int
+                    
+                    db.collection("Count").getDocuments { (array, err) in
+                        if err != nil{
+                            print("Error getting documents: \(String(describing: err))")
+                        }else{
+                            for doc in array!.documents{
+                                
+                                limit = (doc.get("log") as? Int)!
+                                
+                            }
+                            db.collection("TimeSlots").whereField("email", isEqualTo: Auth.auth().currentUser?.email as Any).getDocuments(){
+                                (querySnapShot,err) in
+                                if err != nil {
+                                    print("Error getting documents: \(String(describing: err))")
+                                }else{
+                                    for doc in querySnapShot!.documents{
+                                        
+                                        slotN = doc.get("SlotDetail") as! Int
+                                        
+                                    }
+                                    
+                                }
+                                if(limit <= Slimit && slotN != 0 ){
+                                    if(slotN != 0){
+                                        self.bookASlot.isHidden = true
+                                        self.bookASlot.isEnabled = false
+                                        self.alertBox.text = "Slot booked! SlotNo: \(slotN)"
+                                    }else {
+                                        self.bookASlot.isHidden = false
+                                        self.bookASlot.isEnabled = true
+                                    }
+                                    //                        print("second: ",limit,slotN!)
+                                }else if (limit == Slimit && slotN == 0){
+                                    self.bookASlot.isHidden = true
+                                    self.bookASlot.isEnabled = false
+                                    self.alertBox.text = "All slots for the day are booked, Please try later"
+                                }else{
+                                    self.bookASlot.isHidden = false
+                                    self.bookASlot.isEnabled = true
+                                }
+                            }
+                            
+                            
+                            
+                        }
+                    }
+                    
+                }
+            }
+        }
+        
+        
+    }
+    
+    override func viewDidLoad() {
+        
+        
         
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
         
+//        db.collection("TimeSlots").whereField("name", isEqualTo : Auth.auth().currentUser?.email as Any).getDocuments { (querySnap, err) in
+//            if err != nil{
+//                print("Error getting documents: \(String(describing: err))")
+//            }else{
+//                db.collection("")
+//            }
+//        }
+        
+        
+        
         //if the required number of slots are filled disable the Book a slot button and print it to the scree
         
         
         
-        db.collection("Count").getDocuments { (array, err) in
-            if err != nil{
-                print("Error getting documents: \(String(describing: err))")
-            }else{
-                for doc in array!.documents{
-                    
-                    limit = (doc.get("log") as? Int)!
-                    
-                }
-                db.collection("TimeSlots").whereField("email", isEqualTo: Auth.auth().currentUser?.email as Any).getDocuments(){
-                    (querySnapShot,err) in
-                    if err != nil {
-                        print("Error getting documents: \(String(describing: err))")
-                    }else{
-                        for doc in querySnapShot!.documents{
-                            
-                            slotN = doc.get("SlotDetail") as! Int
-                            
-                        }
-                        
-                    }
-                    if(limit <= 4 && slotN != 0 ){
-                        if(slotN != 0){
-                            self.bookASlot.isEnabled = false
-                            self.alertBox.text = "Slot booked! SlotNo: \(slotN)"
-                        }else {
-                            self.bookASlot.isEnabled = true
-                        }
-                        //                        print("second: ",limit,slotN!)
-                    }else if (limit == 4 && slotN == 0){
-                        self.bookASlot.isEnabled = false
-                    }
-                }
-                
-                
-                
-            }
-        }
-
+        
+        
         //        db.collection("Count").whereField("log", isLessThanOrEqualTo: 4 )
         //            .getDocuments()  { (arrayCount, err) in
         //                if err != nil {
