@@ -15,9 +15,9 @@ import Firebase
 class adminHomeViewController: UIViewController {
     
     
-    var c : Int?
-    var es : Int?
-    var pps : Int?
+    var c = 0
+    var es = 0
+    var pps = 0
     var time1 : Date?
     var time2 : Date?
     var a : [QueryDocumentSnapshot]?
@@ -95,14 +95,14 @@ class adminHomeViewController: UIViewController {
               print(interval!)
               
               c = Int(interval!)
-              print(c!)
+              print(c)
             
             db.collection("Scheduler").document("VariousFields").setData([
 //                "OpenTime"  :   time1!,
 //                "CloseTime" : time2!,
                 "eachSlotTime" : Int(eachSlotTime)!,
                 "personPerSlot" : Int(personPerSlot)!,
-                "MaxPeopleLimit" : (c!/3600)*Int(personPerSlot)!
+                "MaxPeopleLimit" : (c/3600)*Int(personPerSlot)!
             ])
             
             
@@ -119,12 +119,7 @@ class adminHomeViewController: UIViewController {
         
         
     }
-    func totalPersonLimit() -> Int {
-       print("values:",c!,es!,pps!)
-        print("hello:",c!)
-          let total = 0 //((c/60)/es)*pps
-          return total
-      }
+    
     
     
 }
