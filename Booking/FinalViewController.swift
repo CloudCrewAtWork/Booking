@@ -10,9 +10,9 @@ import Firebase
 
 class FinalViewController: UIViewController {
     
+    var schedule = [Scheduler]()
     
-    
-    
+   
     
     
     
@@ -28,6 +28,7 @@ class FinalViewController: UIViewController {
         var limit = 0
         var slotN = 0
         var Slimit = 0
+        
         db.collection("Scheduler").getDocuments { (contents, err) in
             if err != nil {
                 print("Error getting documents: \(String(describing: err))")
@@ -85,7 +86,7 @@ class FinalViewController: UIViewController {
                 }
             }
         }
-        
+        print("number",schedule.count)
         
     }
     
@@ -96,6 +97,39 @@ class FinalViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
+        
+        
+        
+         
+                db.collection("Scheduler").getDocuments { (Query, err) in
+                    if err != nil{
+                        print("Error getting documents: \(String(describing: err))")
+                    }else{
+                        for doc in Query!.documents{
+                            let array = Scheduler()
+                            array.MaxPeopleLimit = doc.get("MaxPeopleLimit") as? Int
+                            array.eachSlotTime = doc.get("eachSlotTime") as? Int
+                            array.personPerSlot = doc.get("personPerSlot") as? Int
+                            self.schedule.append(array)
+                        }
+                    }
+                }
+        print(self.schedule.count)
+  
+//        db.collection("Scheduler").getDocuments { (QeurySnapShot, err) in
+//            if err != nil{
+//                print("Error getting documents: \(String(describing: err))")
+//            }else{
+//                for doc in QeurySnapShot!.documents{
+//                    schedule.MaxPeopleLimit = doc.get("MaxPeopleLimit") as! Int
+//                    schedule.eachSlotTime = doc.get("eachSlotTime") as? Int
+//                    schedule.personPerSlot = doc.get("personPerSlot") as? Int
+//
+//                }
+//
+//            }
+//        }
+        
         
 //        db.collection("TimeSlots").whereField("name", isEqualTo : Auth.auth().currentUser?.email as Any).getDocuments { (querySnap, err) in
 //            if err != nil{
