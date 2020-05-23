@@ -16,8 +16,7 @@ class adminHomeViewController: UIViewController {
     
     
     var c = 0
-    var es = 0
-    var pps = 0
+   
     var time1 : Date?
     var time2 : Date?
     var a : [QueryDocumentSnapshot]?
@@ -95,7 +94,6 @@ class adminHomeViewController: UIViewController {
               print(interval!)
               
               c = Int(interval!)
-              print(c)
             
             db.collection("Scheduler").document("VariousFields").setData([
 //                "OpenTime"  :   time1!,

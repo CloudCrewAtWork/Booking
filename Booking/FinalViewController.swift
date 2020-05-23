@@ -10,7 +10,7 @@ import Firebase
 
 class FinalViewController: UIViewController {
     
-    var schedule = [Scheduler]()
+    var schedule = Scheduler()
     
    
     
@@ -86,7 +86,6 @@ class FinalViewController: UIViewController {
                 }
             }
         }
-        print("number",schedule.count)
         
     }
     
@@ -101,20 +100,8 @@ class FinalViewController: UIViewController {
         
         
          
-                db.collection("Scheduler").getDocuments { (Query, err) in
-                    if err != nil{
-                        print("Error getting documents: \(String(describing: err))")
-                    }else{
-                        for doc in Query!.documents{
-                            let array = Scheduler()
-                            array.MaxPeopleLimit = doc.get("MaxPeopleLimit") as? Int
-                            array.eachSlotTime = doc.get("eachSlotTime") as? Int
-                            array.personPerSlot = doc.get("personPerSlot") as? Int
-                            self.schedule.append(array)
-                        }
-                    }
-                }
-        print(self.schedule.count)
+                
+        
   
 //        db.collection("Scheduler").getDocuments { (QeurySnapShot, err) in
 //            if err != nil{
@@ -180,6 +167,42 @@ class FinalViewController: UIViewController {
     @IBAction func bookASlot(_ sender: UIButton) {
         //        let h = totalPersonLimit()
         //        print("MaxPeopleLimit: ",h)
+        db.collection("Scheduler").getDocuments { (Query, err) in
+            if err != nil{
+                print("Error getting documents: \(String(describing: err))")
+            }else{
+                for doc in Query!.documents{
+                    
+                    self.schedule.MaxPeopleLimit = doc.get("MaxPeopleLimit") as? Int
+                    self.schedule.eachSlotTime = doc.get("eachSlotTime") as? Int
+                    self.schedule.personPerSlot = doc.get("personPerSlot") as? Int
+                    
+                }
+                
+//                print(self.schedule.personPerSlot!)
+                self.cal(PperS: self.schedule.personPerSlot!)
+            }
+        }
+        
+        
+        
+        
+        
+    }
+    
+    @IBAction func logoutPressed(_ sender: UIBarButtonItem) {
+        do {
+            try Auth.auth().signOut()
+            
+            navigationController?.popToRootViewController(animated: true)
+            
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+    
+    func cal(PperS:Int){
+        print(PperS)
         var serialNumber = 0
         let date = Date()
         let df = DateFormatter()
@@ -246,7 +269,7 @@ class FinalViewController: UIViewController {
                                         } else {
                                             // Incrementing the count value as soon as a new slot is booked (IT GIVES US THE TOTAL NUMBER OF SLOTS BOOKED VALUE)
                                             db.collection("Count").document("count").updateData(["log" : FieldValue.increment(Int64(1))])
-                                            self.alertBox.text = "Slot booked! SlotNo: \((serialNumber/15)+1)"
+                                            self.alertBox.text = "Slot booked! SlotNo: \((serialNumber/PperS)+1)"
                                             print("Slot booked!")
                                             
                                             //trying to add slot details
@@ -257,18 +280,18 @@ class FinalViewController: UIViewController {
                                                     print("Error getting documents: \(err)")
                                                 } else {
                                                     
-                                                    db.collection("TimeSlots").document(name!).updateData(["SlotDetail" : (serialNumber/15)+1])
+                                                    db.collection("TimeSlots").document(name!).updateData(["SlotDetail" : (serialNumber/PperS)+1])
                                                     
                                                 }
                                             }
                                             
-                                            let alert = UIAlertController(title: "Alert", message: "Slot Booked! SlotNo: \((serialNumber/15)+1)", preferredStyle: UIAlertController.Style.alert)
+                                            let alert = UIAlertController(title: "Alert", message: "Slot Booked! SlotNo: \((serialNumber/PperS)+1)", preferredStyle: UIAlertController.Style.alert)
                                             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                                             self.present(alert, animated: true, completion: nil)
                                         }
                                     }
                                 } else {
-                                    self.alertBox.text = "Slot booked! SlotNo: \((serialNumber/15)+1)"
+                                    self.alertBox.text = "Slot booked! SlotNo: \((serialNumber/PperS)+1)"
                                     
                                     print("already booked")
                                     
@@ -282,20 +305,9 @@ class FinalViewController: UIViewController {
         }
     }
     
-    @IBAction func logoutPressed(_ sender: UIBarButtonItem) {
-        do {
-            try Auth.auth().signOut()
-            
-            navigationController?.popToRootViewController(animated: true)
-            
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-    }
-    
-    
-    
     
 }
+
+
 
 
