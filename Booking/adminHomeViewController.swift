@@ -39,7 +39,7 @@ class adminHomeViewController: UIViewController {
     
     @IBAction func viewSlotsPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "listViewSegue", sender: self)
-
+        
         
         
     }
@@ -114,9 +114,13 @@ class adminHomeViewController: UIViewController {
             print("Please fill all the fields!")
         }
         
-        
+        openingTimeSet.text = ""
+        closingTimeSet.text = ""
+        eachSlotTiming.text = ""
+        peoplePerSlotSet.text = ""
         
     }
+    
     
     
     
