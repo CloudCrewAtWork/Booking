@@ -11,12 +11,7 @@ import Firebase
 class FinalViewController: UIViewController {
     
     var schedule = Scheduler()
-    
-   
-    
-    
-    
-    
+
     
     @IBOutlet weak var timeDisplay: UILabel!
     @IBOutlet weak var bookASlot: UIButton!
