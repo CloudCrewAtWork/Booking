@@ -11,12 +11,7 @@ import Firebase
 class FinalViewController: UIViewController {
     
     var schedule = Scheduler()
-    
-   
-    
-    
-    
-    
+
     
     @IBOutlet weak var timeDisplay: UILabel!
     @IBOutlet weak var bookASlot: UIButton!
@@ -90,75 +85,10 @@ class FinalViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        
-        
-        
+
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
-        
-        
-        
-         
-                
-        
-  
-//        db.collection("Scheduler").getDocuments { (QeurySnapShot, err) in
-//            if err != nil{
-//                print("Error getting documents: \(String(describing: err))")
-//            }else{
-//                for doc in QeurySnapShot!.documents{
-//                    schedule.MaxPeopleLimit = doc.get("MaxPeopleLimit") as! Int
-//                    schedule.eachSlotTime = doc.get("eachSlotTime") as? Int
-//                    schedule.personPerSlot = doc.get("personPerSlot") as? Int
-//
-//                }
-//
-//            }
-//        }
-        
-        
-//        db.collection("TimeSlots").whereField("name", isEqualTo : Auth.auth().currentUser?.email as Any).getDocuments { (querySnap, err) in
-//            if err != nil{
-//                print("Error getting documents: \(String(describing: err))")
-//            }else{
-//                db.collection("")
-//            }
-//        }
-        
-        
-        
-        //if the required number of slots are filled disable the Book a slot button and print it to the scree
-        
-        
-        
-        
-        
-        //        db.collection("Count").whereField("log", isLessThanOrEqualTo: 4 )
-        //            .getDocuments()  { (arrayCount, err) in
-        //                if err != nil {
-        //                    print("Error getting documents: \(String(describing: err))")
-        //                } else {
-        //                    db.collection("TimeSlots").whereField("email", isEqualTo: Auth.auth().currentUser?.email as Any).getDocuments(){
-        //                        (querySnapShot,err) in
-        //                        if err != nil {
-        //                            print("Error getting documents: \(String(describing: err))")
-        //                        }else{
-        //                            for doc in querySnapShot!.documents{
-        //
-        //                                let slotN = doc.get("SlotDetail") as? Int
-        //
-        //
-        //                            }
-        //
-        //                        }
-        //                    }
-        //
-        //
-        //
-        //
-        //                }
-        //        }
         
         
     }
@@ -183,11 +113,7 @@ class FinalViewController: UIViewController {
                 self.cal(PperS: self.schedule.personPerSlot!)
             }
         }
-        
-        
-        
-        
-        
+
     }
     
     @IBAction func logoutPressed(_ sender: UIBarButtonItem) {
@@ -307,7 +233,3 @@ class FinalViewController: UIViewController {
     
     
 }
-
-
-
-
