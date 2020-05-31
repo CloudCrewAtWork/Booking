@@ -56,9 +56,7 @@ class RegisterViewController: UIViewController {
                                                 print("Error  creating user")
                                             } else {
                                                 print("Registration success")
-//                                                let alert = UIAlertController(title: "Alert", message: "Registration Successful", preferredStyle: UIAlertController.Style.alert)
-//                                                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-//                                                self.present(alert, animated: true, completion: nil)
+
                                                 self.performSegue(withIdentifier: "goToBooking", sender: self)
                                                 
                                                 db.collection("Users").document(c.name).setData([

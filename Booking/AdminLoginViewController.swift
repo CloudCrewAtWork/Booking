@@ -36,23 +36,11 @@ class AdminLoginViewController: UIViewController {
                 }else{
                     print("Aid not found")
                 }
-//                self.performSegue(withIdentifier: "adminHomePage", sender: self)
-
 
             }
 
         }
-        
-        
-        
-        
-        
-        
-        
+
     }
-    
-    
-    
-    
-    
+
 }
