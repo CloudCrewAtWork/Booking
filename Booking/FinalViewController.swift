@@ -89,8 +89,7 @@ class FinalViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "earth.png")!)
         navigationItem.hidesBackButton = true
-        
-        
+  
     }
     
     @IBOutlet weak var alertBox: UILabel!
@@ -101,15 +100,19 @@ class FinalViewController: UIViewController {
             if err != nil{
                 print("Error getting documents: \(String(describing: err))")
             }else{
-                for doc in Query!.documents{
-                    
-                    self.schedule.MaxPeopleLimit = doc.get("MaxPeopleLimit") as? Int
-                    self.schedule.eachSlotTime = doc.get("eachSlotTime") as? Int
-                    self.schedule.personPerSlot = doc.get("personPerSlot") as? Int
-                    
-                }
                 
-//                print(self.schedule.personPerSlot!)
+                self.schedule.MaxPeopleLimit = Query!.documents[0].get("MaxPeopleLimit") as? Int
+                self.schedule.eachSlotTime = Query!.documents[0].get("eachSlotTime") as? Int
+                self.schedule.personPerSlot = Query!.documents[0].get("personPerSlot") as? Int
+//
+//                for doc in Query!.documents{
+//
+//                    self.schedule.MaxPeopleLimit = doc.get("MaxPeopleLimit") as? Int
+//                    self.schedule.eachSlotTime = doc.get("eachSlotTime") as? Int
+//                    self.schedule.personPerSlot = doc.get("personPerSlot") as? Int
+//
+                
+
                 self.cal(PperS: self.schedule.personPerSlot!)
             }
         }
