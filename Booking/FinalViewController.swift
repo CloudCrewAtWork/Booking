@@ -30,7 +30,7 @@ class FinalViewController: UIViewController {
             }else{
                 for doc in contents!.documents{
                     
-                    Slimit = doc.get("MaxPeopleLimit") as! Int
+                    Slimit = doc.get("maxPeopleLimit") as! Int
                     
                     db.collection("Count").getDocuments { (array, err) in
                         if err != nil{
@@ -72,9 +72,7 @@ class FinalViewController: UIViewController {
                                     self.bookASlot.isEnabled = true
                                 }
                             }
-                            
-                            
-                            
+    
                         }
                     }
                     
@@ -101,17 +99,9 @@ class FinalViewController: UIViewController {
                 print("Error getting documents: \(String(describing: err))")
             }else{
                 
-                self.schedule.maxPeopleLimit = Query!.documents[0].get("MaxPeopleLimit") as? Int
+                self.schedule.maxPeopleLimit = Query!.documents[0].get("maxPeopleLimit") as? Int
                 self.schedule.eachSlotTime = Query!.documents[0].get("eachSlotTime") as? Int
                 self.schedule.personPerSlot = Query!.documents[0].get("personPerSlot") as? Int
-//
-//                for doc in Query!.documents{
-//
-//                    self.schedule.MaxPeopleLimit = doc.get("MaxPeopleLimit") as? Int
-//                    self.schedule.eachSlotTime = doc.get("eachSlotTime") as? Int
-//                    self.schedule.personPerSlot = doc.get("personPerSlot") as? Int
-//
-                
 
                 self.cal(PperS: self.schedule.personPerSlot!)
             }
