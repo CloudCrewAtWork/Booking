@@ -82,7 +82,7 @@ class adminHomeViewController: UIViewController {
 
                 "eachSlotTime" : Int(eachSlotTime)!,
                 "personPerSlot" : Int(personPerSlot)!,
-                "MaxPeopleLimit" : (c/3600)*Int(personPerSlot)!
+                "maxPeopleLimit" : (c/3600)*Int(personPerSlot)!
             ])
      
         }else{

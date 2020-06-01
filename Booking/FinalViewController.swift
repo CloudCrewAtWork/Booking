@@ -101,7 +101,7 @@ class FinalViewController: UIViewController {
                 print("Error getting documents: \(String(describing: err))")
             }else{
                 
-                self.schedule.MaxPeopleLimit = Query!.documents[0].get("MaxPeopleLimit") as? Int
+                self.schedule.maxPeopleLimit = Query!.documents[0].get("MaxPeopleLimit") as? Int
                 self.schedule.eachSlotTime = Query!.documents[0].get("eachSlotTime") as? Int
                 self.schedule.personPerSlot = Query!.documents[0].get("personPerSlot") as? Int
 //

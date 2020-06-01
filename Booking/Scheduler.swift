@@ -8,7 +8,7 @@
 
 import Foundation
 class Scheduler {
-    var MaxPeopleLimit: Int? = nil
+    var maxPeopleLimit: Int? = nil
     var eachSlotTime: Int? = nil
     var personPerSlot: Int? = nil
     
